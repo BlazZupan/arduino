@@ -27,6 +27,6 @@ Tipka
 =====
 1. Odpri nov program. Počisti protoboard in na nanj priključi stikalo, kot kaže spodnja shema.
 
-![vezava tipke](https://www.arduino.cc/en/uploads/Tutorial/button_sch.png "Vezava")
+![vezava tipke](https://www.arduino.cc/en/uploads/Tutorial/button_sch.png "Vezava" =200x)
 
 2. Izpiši stanje tipke z enostavnim programom, ki to stanje [izpiše na serijskem monitorju](https://www.arduino.cc/en/Tutorial/DigitalReadSerial).
