@@ -8,13 +8,13 @@ Prižiganje LED diod
 
 Nizi in for zanke
 =================
-1. Priklopi pet LED diod na Arduino. Uporabiš lahko pine 2, 3, 4, 5, 6. Napiši program za vlak, ki ugaša in prižiga LED diode v vrsti. A pri tem nujno uporabi niz ([Array](https://www.arduino.cc/en/Reference/Array)) in LED diode prižigaj in ugašaj v <for> zanki. Niz lahko uvedeš na vrhu programa, na primer z:
+1.    Priklopi pet LED diod na Arduino. Uporabiš lahko pine 2, 3, 4, 5, 6. Napiši program za vlak, ki ugaša in prižiga LED diode v vrsti. A pri tem nujno uporabi niz ([Array](https://www.arduino.cc/en/Reference/Array)) in LED diode prižigaj in ugašaj v <for> zanki. Niz lahko uvedeš na vrhu programa, na primer z:
 
 ~~~
   int myPins[] = {2, 4, 8, 3, 6};
 ~~~
 
-    Primer <for> zanke pa je:
+   Primer <for> zanke pa je:
 
 ~~~
   int i;
@@ -23,7 +23,7 @@ Nizi in for zanke
   }
 ~~~
 
-2. Čas, ko je ena dioda prižgana, zapiši v spremenljivko <delayTime> in to spremenljivko uporabi v stavku <delay>. To najbrž tvoj program že tako ali tako počne (če ne, spremeni). Spreminjaj vrednost te spremenljivke, da so diode prižgane 100 ms ali pa 500 ms.
+2.   Čas, ko je ena dioda prižgana, zapiši v spremenljivko <delayTime> in to spremenljivko uporabi v stavku <delay>. To najbrž tvoj program že tako ali tako počne (če ne, spremeni). Spreminjaj vrednost te spremenljivke, da so diode prižgane 100 ms ali pa 500 ms.
 3. Bi znal v program dodati še eno <for> zanko tako, da prižigaš vlak diod zdaj v eno in nato v drugo smer? S tako imenovanim efektom Darth Vader?
 4. Zdaj pa naredi tako, da se hitrost prižiganja in ugašanja LED diod spreminja med 100 ms in 500 ms, v koraku po 100 ms. To lahko narediš tako, da oviješ for zanke za prižiganje diod v novo for zanko, ki spreminja spremenljivko <delayTime>.
 
