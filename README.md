@@ -29,4 +29,52 @@ Tipka
 
 ![tipka](https://www.arduino.cc/en/uploads/Tutorial/button_sch.png "Vezava")
 
-2. Izpiši stanje tipke z enostavnim programom, ki to stanje [izpiše na serijskem monitorju](https://www.arduino.cc/en/Tutorial/DigitalReadSerial).
+2. Izpiši stanje tipke z enostavnim programom, ki to stanje [izpiše na serijskem monitorju](https://www.arduino.cc/en/Tutorial/DigitalReadSerial). Program bo stalno izpisoval stanje tipke. Povečaj čas, ko arduino čaka (funkcija <delay>) na 100 ms. Drži tipko pritisnjeno, tako da vidiš, ali se je stanje res spremenilo.
+3. Zgornji program spremeni tako, da izpišeš stanje tipke samo takrat, ko se to spremeni. Se pravi, izpišeš stanje 1 takrat, ko je bilo prej stanje 0. Za to boš moral uvesti spremenljivko, ki si ti zapomni stanje tipke. Na primer:
+
+  int state = 0;
+
+...Stanje je na začetku 0 ker predpostaviš, da na začetku tipka ni pritisnjena. Potem pa morda v funkciji <loop()> uporabiš naslednjo kodo:
+
+  int buttonState = digitalRead(pushButton);
+  if buttonState != state:
+    Serial.println(buttonState);
+    state = buttonState;
+
+...Oznaka <!=> pomeni "ni enak" in je eden od operatorjev, ki jih lahko uporabiš v programske jeziku C. Podobne opreatorje si že uporabljal, ko si pisal <for> stavke. Tam si uporabljal operatorje "večji" ali pa "manjši in je enak". Seznam operatorjev, ki jih pozna C, imaš na [wikipediji](https://en.wikipedia.org/wiki/Operators_in_C_and_C%2B%2B). Aha, da ne pozabim: v kodi v tej nalogi lahko odstraniš <delay>. Sedaj, ko ti vse dela, malce poskusi, kaj dobiš. Ali se ti vedno pravilno izpiše ena vrstica z "1" takrat, ko pritisneš tipko? Morda lahko opaziš, zakaj pri branju tipk potrebuješ "debouncing".
+
+4. Najbolje bi bilo, če bi se ob spremembi stanja tipke poklicala neka tvoja C-jevska funkcija. Torej, ko bi pritisnil tipko, bi se poklicala funkcija <pressed()>. Ko pa bi tipko spet spustil, bi se poklicala funkcija <pressed()>. Na tak način bi bilo dobro spremljati stanja vseh tipal (tole zadnje je slovenski izraz za senzorje). V bistvu moramo programu naročiti, da ob pritisku na tipko prekine s tem, kar trenutno počne, in pokliče funkcijo <released()>. Zedevi torej pravimo "prekinitev" ali angleško "interrupt". Prekinitve določimo kar v funkciji <setup()>. Ardoino Uno ima samo dva vhoda, ki jih stalno spremlja in jih lahko uporabimo za prekinitve. To sta vhoda na priključkih 2 in 3, ki sta na Arduinu poimenovana kot prekinitev z oznako 0 (na pinu 2) in prekinitev z oznako 1 (na pinu 3). Za eno samo tipko zato lahko napišeš funkcijo <setup> kot:
+
+  void setup()
+  {
+    Serial.begin(9600);
+    attachInterrupt(0, pressed, RISING); // pin 2, tipko pritisnemo, napetost se dvign
+    attachInterrupt(1, released, FALLING); // digital pin 3 // down
+  }
+
+...Vrstico <Serial.begin(9600);> si moral vključiti v zgornjo kodo zato, da boš s <Serial> izpisovala kakšne stvari in na ta način preverjal delovanje programa. V kodo moraš sedaj dodati še funkciji <pressed> in <released>. Ti dve funkciji lahko dodaš po funkciji <setup()>. Na začetku bomo samo izpisali, ali je bila tipka pritisnjena ali pa smo jo spustili. Kakšnih posebnih spremenljivk ne bomo nastavljali.
+
+  void pressed()
+  {
+    Serial.println("Button pressed");
+  }
+  
+  void released()
+  {
+    Serial.println("Button released");
+  }
+  
+...Najkrajša bo sedaj funkcija <loop()>, ki jo dodaš čisto na koncu:
+
+  void loop()
+  {
+  }
+
+...Zakaj je lahko taka? Zakaj, kljub temu, da je prazna, zadeve še vedno delajo in se stanje tipke izpisuje?
+
+5. Tole zgoraj je bilo bolj samo sebi namen. Pravzaprav je bilo čisto uporabno, saj smo na ta način preverili, ali nam osnovni program za detekcijo stanja tipke deluje. Sedaj pa zares. Spremeni vezje tako, da dodaš rdečo in zeleno LED diodo. V tvojem programu čisto zgoraj lahko dodaš konstante, ki povedo, na katerih priključkih sta ti dve diodi:
+
+  const int led_red = 5;
+  const int led_red = 6;
+  
+...Ko je tipka pritisnjena, sedaj želimo prižgati rdečo diodo (zeleno diodo takrat ugasnemo), ko pa je dvignjena, naj gori zelena (rdečo diodo ugasnemo). To boš seveda naredil tako, da spremeniš funkciji <pressed()> in <released()> in tam dodaš stavke za prižiganje in ugašanje diod.
