@@ -14,12 +14,14 @@ Nizi in for zanke
   int myPins[] = {2, 4, 8, 3, 6};
 ~~~
 
-  Primer <for> zanke pa je:
+    Primer <for> zanke pa je:
 
+~~~
   int i;
   for (i = 0; i < 5; i = i + 1) {
     Serial.println(myPins[i]);
   }
+~~~
 
 2. Čas, ko je ena dioda prižgana, zapiši v spremenljivko <delayTime> in to spremenljivko uporabi v stavku <delay>. To najbrž tvoj program že tako ali tako počne (če ne, spremeni). Spreminjaj vrednost te spremenljivke, da so diode prižgane 100 ms ali pa 500 ms.
 3. Bi znal v program dodati še eno <for> zanko tako, da prižigaš vlak diod zdaj v eno in nato v drugo smer? S tako imenovanim efektom Darth Vader?
