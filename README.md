@@ -10,9 +10,11 @@ Nizi in for zanke
 =================
 1. Priklopi pet LED diod na Arduino. Uporabiš lahko pine 2, 3, 4, 5, 6. Napiši program za vlak, ki ugaša in prižiga LED diode v vrsti. A pri tem nujno uporabi niz ([Array](https://www.arduino.cc/en/Reference/Array)) in LED diode prižigaj in ugašaj v <for> zanki. Niz lahko uvedeš na vrhu programa, na primer z:
 
+~~~
   int myPins[] = {2, 4, 8, 3, 6};
-  
-...Primer <for> zanke pa je:
+~~~
+
+  Primer <for> zanke pa je:
 
   int i;
   for (i = 0; i < 5; i = i + 1) {
